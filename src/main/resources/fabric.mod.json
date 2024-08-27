@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "notramplefarmland",
+	"version": "${version}",
+	"name": "notramplefarmland",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"colmmurphyxyz"
+	],
+	"contact": {
+		"homepage": "https://colmmurphy.xyz",
+		"sources": "https://github.com/colmmurphyxyz"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/notramplefarmland/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"xyz.colmmurphy.Notramplefarmland"
+		],
+		"client": [
+			"xyz.colmmurphy.NotramplefarmlandClient"
+		]
+	},
+	"mixins": [
+		"notramplefarmland.mixins.json",
+		{
+			"config": "notramplefarmland.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.3",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
