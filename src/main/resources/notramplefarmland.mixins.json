@@ -3,7 +3,8 @@
 	"package": "xyz.colmmurphy.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"FarmlandBlockMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
