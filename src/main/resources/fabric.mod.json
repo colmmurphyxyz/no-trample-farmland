@@ -16,10 +16,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"xyz.colmmurphy.Notramplefarmland"
+			"xyz.colmmurphy.NoTrampleFarmland"
 		],
 		"client": [
-			"xyz.colmmurphy.NotramplefarmlandClient"
+			"xyz.colmmurphy.NoTrampleFarmlandClient"
 		]
 	},
 	"mixins": [
