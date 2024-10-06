@@ -31,6 +31,10 @@ public class FarmlandBlockMixin {
             float fallDistance,
             CallbackInfo ci
     ) {
+        // farmland can only be turned to dirt if the entity fell more than 0.5 blocks
+        if (fallDistance <= 0.5f) {
+            return;
+        }
         if (ci.isCancellable() && !ci.isCancelled()) {
             LOGGER.info("Cancelling FarmlandBlock::onLandedUpon");
             ci.cancel();
