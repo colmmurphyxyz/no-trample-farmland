@@ -18,17 +18,13 @@ public class FarmlandBlockMixin {
     @Unique
     private static final Logger LOGGER = NoTrampleFarmland.LOGGER;
 
-    @Inject(
-            at = @At("HEAD"),
-            method = "onLandedUpon",
-            cancellable = true
-    )
+    @Inject(at = @At("HEAD"), method = "onLandedUpon", cancellable = true)
     private void onLandedUpon(
             World world,
             BlockState state,
             BlockPos pos,
             Entity entity,
-            float fallDistance,
+            double fallDistance,
             CallbackInfo ci
     ) {
         // farmland can only be turned to dirt if the entity fell more than 0.5 blocks
