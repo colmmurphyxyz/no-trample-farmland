@@ -1,41 +1,34 @@
 package xyz.colmmurphy.mixin;
-
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.slf4j.Logger;
 import xyz.colmmurphy.NoTrampleFarmland;
 
 @Mixin(value = FarmlandBlock.class, priority = 1001)
-public class FarmlandBlockMixin {
+public abstract class FarmlandBlockMixin extends Block {
     @Unique
     private static final Logger LOGGER = NoTrampleFarmland.LOGGER;
 
-    @Inject(at = @At("HEAD"), method = "onLandedUpon", cancellable = true)
-    private void onLandedUpon(
-            World world,
-            BlockState state,
-            BlockPos pos,
-            Entity entity,
-            double fallDistance,
-            CallbackInfo ci
-    ) {
-        // farmland can only be turned to dirt if the entity fell more than 0.5 blocks
-        if (fallDistance <= 0.5f) {
-            return;
-        }
-        if (ci.isCancellable() && !ci.isCancelled()) {
-            LOGGER.info("Cancelling FarmlandBlock::onLandedUpon");
-            ci.cancel();
-            // fallDistance <= 0 ensures farmland will not be turned to dirt
-            state.getBlock().onLandedUpon(world, state, pos, entity, 0.0f);
-        }
+    public FarmlandBlockMixin(Settings settings) {
+        super(settings);
+    }
+
+    @Redirect(method = "onLandedUpon",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/block/FarmlandBlock;setToDirt(Lnet/minecraft/entity/Entity;Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V"
+            )
+    )
+    private static void redirectedSetToDirt(@Nullable Entity entity, BlockState state, World world, BlockPos pos) {
+        LOGGER.trace("Redirected call to FarmlandBlock::setToDirt");
     }
 }
