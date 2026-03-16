@@ -19,7 +19,7 @@
           inherit system;
           config.allowUnfree = true;
         };
-        java = pkgs.jdk21_headless;
+        java = pkgs.javaPackages.compiler.openjdk21;
       in
       {
         devShells.default = pkgs.mkShell {
@@ -29,6 +29,13 @@
           ];
           shellHook = ''
             export JAVA_HOME=$(dirname $(dirname $(which java)))
+            export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${
+              pkgs.lib.makeLibraryPath [
+                pkgs.libGL
+                pkgs.xorg.libX11
+                pkgs.fontconfig
+              ]
+            };
           '';
         };
       }
