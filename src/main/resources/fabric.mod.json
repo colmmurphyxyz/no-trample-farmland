@@ -3,7 +3,7 @@
 	"id": "notramplefarmland",
 	"version": "${version}",
 	"name": "notramplefarmland",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Prevent farmland from turning to dirt when an entity lands on it",
 	"authors": [
 		"colmmurphyxyz"
 	],
@@ -30,9 +30,9 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.16.3",
-		"minecraft": "~1.21.1",
-		"java": ">=21",
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
 		"fabric-api": "*"
 	},
 	"suggests": {
