@@ -26,10 +26,10 @@ public abstract class FarmlandBlockMixin extends Block {
     @Redirect(method = "fallOn",
             at = @At(
                     value = "INVOKE",
-                    target="Lnet/minecraft/world/level/block/FarmlandBlock;turnToDirt(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
+                    target="Lnet/minecraft/world/level/block/FarmlandBlock;turnToBaseBlock(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
             )
     )
-    private static void turnToDirt(final @Nullable Entity sourceEntity, final BlockState state, final Level level, final BlockPos pos) {
+    public void redirectTurnToBaseBlock(FarmlandBlock block, final @Nullable Entity sourceEntity, final BlockState state, final Level level, final BlockPos pos) {
         LOGGER.trace("Redirected call to FarmlandBlock::setToDirt");
     }
 
